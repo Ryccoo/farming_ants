@@ -4,6 +4,8 @@ patches-own [
   nest?                ;; true on nest patches, false elsewhere
   nest-scent           ;; number that is higher closer to the nest
   food-source-number   ;; number (1, 2, or 3) to identify the food sources
+  is-grass?            ;; true if patch is grass
+  remaining-grow-time  ;; number of ticks before food growing
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21,10 +23,30 @@ to setup
 end
 
 to setup-patches
+  setup-green-lands
   ask patches
-  [ setup-nest
+  [
+    setup-nest
     setup-food
-    recolor-patch ]
+    recolor-patch 
+  ]
+end
+
+to setup-green-lands
+  ask patches [
+   if distancexy 0 0 > 10 [
+     if random 100 < 25
+     [
+       set is-grass? true
+     ] 
+   ]
+  ]
+  ask patches [
+   ifelse count neighbors with [is-grass? = true] > 2
+   [ set is-grass? true
+     set remaining-grow-time (random 50) + grow-time ]
+   [ set is-grass? false ]
+  ]
 end
 
 to setup-nest  ;; patch procedure
@@ -37,16 +59,16 @@ end
 to setup-food  ;; patch procedure
   ;; setup food source one on the right
   if (distancexy (0.6 * max-pxcor) 0) < 5
-  [ set food-source-number 1 ]
+  [ set food-source-number 1
+    set food 1]
   ;; setup food source two on the lower-left
   if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
-  [ set food-source-number 2 ]
+  [ set food-source-number 2
+    set food 2 ]
   ;; setup food source three on the upper-left
   if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
-  [ set food-source-number 3 ]
-  ;; set "food" at sources to either 1 or 2, randomly
-  if food-source-number > 0
-  [ set food one-of [1 2] ]
+  [ set food-source-number 3
+    set food 3 ]
 end
 
 to recolor-patch  ;; patch procedure
@@ -54,11 +76,11 @@ to recolor-patch  ;; patch procedure
   ifelse nest?
   [ set pcolor violet ]
   [ ifelse food > 0
-    [ if food-source-number = 1 [ set pcolor cyan ]
-      if food-source-number = 2 [ set pcolor sky  ]
-      if food-source-number = 3 [ set pcolor blue ] ]
+    [ set pcolor scale-color blue food 0 5]
     ;; scale color to show chemical concentration
-    [ set pcolor scale-color green chemical 0.1 5 ] ]
+    [ set pcolor scale-color red chemical 0.1 8
+      if is-grass?
+      [ set pcolor green ] ] ]
 end
 
 ;;;;;;;;;;;;;;;;;;;;;
@@ -70,14 +92,51 @@ to go  ;; forever button
   [ if who >= ticks [ stop ] ;; delay initial departure
     ifelse color = red
     [ look-for-food  ]       ;; not carrying food? look for it
-    [ return-to-nest ]       ;; carrying food? take it back to nest
+    [ ifelse color = yellow 
+      [ plant-food-resource ]                 ;; planting
+      [ return-to-nest ] ]       ;; carrying food? take it back to nest
     wiggle
     fd 1 ]
   diffuse chemical (diffusion-rate / 100)
   ask patches
-  [ set chemical chemical * (100 - evaporation-rate) / 100  ;; slowly evaporate chemical
+  [ grow-food
+    set chemical chemical * (100 - evaporation-rate) / 100  ;; slowly evaporate chemical
     recolor-patch ]
+  if count patches with [food > 0] = 0 and count turtles with [color = red] = count turtles
+  [ stop ]
   tick
+end
+
+to plant-food-resource
+ if food = 0 and is-grass? = true
+ [
+  set food 1
+  set color red
+  set remaining-grow-time (random 50) + grow-time
+ ] 
+end
+
+to grow-food
+  if food > 0 
+  [
+    ifelse remaining-grow-time > 0
+    [
+      set remaining-grow-time remaining-grow-time - 1
+    ]
+    [
+      if food < 3 
+      [ set food food + 1 ]
+      set remaining-grow-time (random 50) + grow-time
+     if count neighbors with [ is-grass? = true and food = 0 ] > 0
+     [
+       ask one-of neighbors with [ is-grass? = true and food = 0 ]
+       [
+         set food 1
+         set remaining-grow-time (random 50) + grow-time
+       ]
+     ]
+    ]
+  ]
 end
 
 to return-to-nest  ;; turtle procedure
@@ -91,11 +150,19 @@ end
 
 to look-for-food  ;; turtle procedure
   if food > 0
-  [ set color orange + 1     ;; pick up food
-    set food food - 1        ;; and reduce the food source
-    rt 180                   ;; and turn around
-    stop ]
-  ;; go in the direction where the chemical smell is strongest
+  [
+   ifelse random 100 < farming-probability [
+     set food food - 1
+     set color yellow
+     stop
+   ]
+   [
+     set food food - 1
+     set color orange
+     stop
+   ]
+  ]
+;; go in the direction where the chemical smell is strongest
   if (chemical >= 0.05) and (chemical < 2)
   [ uphill-chemical ]
 end
@@ -197,7 +264,7 @@ diffusion-rate
 diffusion-rate
 0.0
 99.0
-20
+24
 1.0
 1
 NIL
@@ -244,17 +311,17 @@ population
 population
 0.0
 200.0
-57
+95
 1.0
 1
 NIL
 HORIZONTAL
 
 PLOT
-5
-197
-248
-476
+823
+94
+1066
+373
 Food in each pile
 time
 food
@@ -269,6 +336,36 @@ PENS
 "food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
 "food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
 "food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
+
+SLIDER
+31
+182
+222
+216
+farming-probability
+farming-probability
+0
+100
+28
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+32
+228
+205
+262
+grow-time
+grow-time
+50
+500
+190
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
