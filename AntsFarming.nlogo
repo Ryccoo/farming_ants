@@ -1,3 +1,7 @@
+globals [
+  food-collected
+]
+
 patches-own [
   chemical             ;; amount of chemical on this patch
   food                 ;; amount of food on this patch (0, 1, or 2)
@@ -6,6 +10,11 @@ patches-own [
   food-source-number   ;; number (1, 2, or 3) to identify the food sources
   is-grass?            ;; true if patch is grass
   remaining-grow-time  ;; number of ticks before food growing
+  alive-time           ;; number of ticks food has been alive
+]
+
+turtles-own [
+  time-carrying        ;; time required to drop
 ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -14,15 +23,18 @@ patches-own [
 
 to setup
   clear-all
+  ;;import-world "world.csv"
+  set food-collected 0
   set-default-shape turtles "bug"
   crt population
   [ set size 2         ;; easier to see
-    set color red  ]   ;; red = not carrying food
-  setup-patches
+    set color red      ;; red = not carrying food
+    set time-carrying 0 ]   
+  setup-patches-random
   reset-ticks
 end
 
-to setup-patches
+to setup-patches-random
   setup-green-lands
   ask patches
   [
@@ -58,15 +70,17 @@ end
 
 to setup-food  ;; patch procedure
   ;; setup food source one on the right
-  if (distancexy (0.6 * max-pxcor) 0) < 5
+  if (distancexy (0.6 * max-pxcor) 0) < 5 and is-grass? = true
   [ set food-source-number 1
-    set food 1]
+    ;;set food 1
+    ]
   ;; setup food source two on the lower-left
-  if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
+  if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5 and is-grass? = true
   [ set food-source-number 2
-    set food 2 ]
+    ;;set food 2 
+    ]
   ;; setup food source three on the upper-left
-  if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
+  if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5 and is-grass? = true
   [ set food-source-number 3
     set food 3 ]
 end
@@ -93,27 +107,38 @@ to go  ;; forever button
     ifelse color = red
     [ look-for-food  ]       ;; not carrying food? look for it
     [ ifelse color = yellow 
-      [ plant-food-resource ]                 ;; planting
+      [ plant-food-resource ;; planting
+      ]
       [ return-to-nest ] ]       ;; carrying food? take it back to nest
     wiggle
     fd 1 ]
+
   diffuse chemical (diffusion-rate / 100)
+
   ask patches
   [ grow-food
+    die-food
     set chemical chemical * (100 - evaporation-rate) / 100  ;; slowly evaporate chemical
     recolor-patch ]
+
   if count patches with [food > 0] = 0 and count turtles with [color = red] = count turtles
   [ stop ]
   tick
 end
 
 to plant-food-resource
- if food = 0 and is-grass? = true
+ set time-carrying time-carrying + 1
+ if food = 0 and is-grass? = true and time-carrying > time-to-drop
  [
   set food 1
+  set alive-time 0
   set color red
   set remaining-grow-time (random 50) + grow-time
  ] 
+ if time-carrying > time-to-drop + 15
+ [
+   set color red 
+ ]
 end
 
 to grow-food
@@ -132,6 +157,7 @@ to grow-food
        ask one-of neighbors with [ is-grass? = true and food = 0 ]
        [
          set food 1
+         set alive-time 0
          set remaining-grow-time (random 50) + grow-time
        ]
      ]
@@ -139,10 +165,19 @@ to grow-food
   ]
 end
 
+to die-food
+  set alive-time alive-time + 1
+  if alive-time > grow-time * 5
+  [
+    set food 0 
+  ]
+end
+
 to return-to-nest  ;; turtle procedure
   ifelse nest?
   [ ;; drop food and head out again
     set color red
+    set food-collected food-collected + 1
     rt 180 ]
   [ set chemical chemical + 60  ;; drop some chemical
     uphill-nest-scent ]         ;; head toward the greatest value of nest-scent
@@ -153,6 +188,7 @@ to look-for-food  ;; turtle procedure
   [
    ifelse random 100 < farming-probability [
      set food food - 1
+     set time-carrying 0
      set color yellow
      stop
    ]
@@ -214,8 +250,8 @@ end
 GRAPHICS-WINDOW
 257
 10
-764
-538
+765
+539
 35
 35
 7.0
@@ -264,7 +300,7 @@ diffusion-rate
 diffusion-rate
 0.0
 99.0
-24
+23
 1.0
 1
 NIL
@@ -279,7 +315,7 @@ evaporation-rate
 evaporation-rate
 0.0
 99.0
-6
+7
 1.0
 1
 NIL
@@ -311,20 +347,20 @@ population
 population
 0.0
 200.0
-95
+100
 1.0
 1
 NIL
 HORIZONTAL
 
 PLOT
-823
-94
-1066
-373
-Food in each pile
+1018
+82
+1261
+361
+graph
 time
-food
+count
 0.0
 50.0
 0.0
@@ -333,20 +369,19 @@ true
 false
 "" ""
 PENS
-"food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
-"food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
-"food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
+"food on map" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [ pcolor != green and pcolor != black ]"
+"food collected" 1.0 0 -5298144 true "" "plot food-collected"
 
 SLIDER
 31
 182
 222
-216
+215
 farming-probability
 farming-probability
 0
 100
-28
+25
 1
 1
 NIL
@@ -356,12 +391,27 @@ SLIDER
 32
 228
 205
-262
+261
 grow-time
 grow-time
 50
 500
-190
+150
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+34
+273
+206
+306
+time-to-drop
+time-to-drop
+0
+50
+30
 1
 1
 NIL
@@ -719,6 +769,35 @@ NetLogo 5.0.5
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiment" repetitions="5" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <metric>food-collected</metric>
+    <metric>sum [food] of patches with [ pcolor != green and pcolor != black ]</metric>
+    <enumeratedValueSet variable="time-to-drop">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="evaporation-rate">
+      <value value="7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="population">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="diffusion-rate">
+      <value value="23"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="grow-time">
+      <value value="150"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="farming-probability">
+      <value value="25"/>
+      <value value="30"/>
+      <value value="35"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
