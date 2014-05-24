@@ -38,6 +38,9 @@ end
 
 to recalculate-world
   ask patches [
+    set nest? false
+    set is-grass? false
+    set food 0
     if pcolor = violet [ set nest? true ]
     if pcolor = green [ set is-grass? true ]
     if pcolor = 106 [ set food 1 ]
