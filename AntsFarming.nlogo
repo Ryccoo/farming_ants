@@ -43,7 +43,11 @@ to recalculate-world
     set food 0
     if pcolor = violet [ set nest? true ]
     if pcolor = green [ set is-grass? true ]
-    if pcolor = 106 [ set food 1 ]
+    if pcolor = 106 [ 
+      set food 1
+      set is-grass? true 
+    ]
+    setup-nest
   ]
 end
 
@@ -148,7 +152,7 @@ to plant-food-resource
   set color red
   set remaining-grow-time (random 50) + grow-time
  ] 
- if time-carrying > time-to-drop + 15
+ if time-carrying > time-to-drop + 20
  [
    set color red 
  ]
@@ -394,7 +398,7 @@ farming-probability
 farming-probability
 0
 100
-25
+29
 1
 1
 NIL
@@ -409,7 +413,7 @@ grow-time
 grow-time
 50
 500
-150
+160
 1
 1
 NIL
