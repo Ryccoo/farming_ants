@@ -24,14 +24,24 @@ turtles-own [
 to setup
   clear-all
   ;;import-world "world.csv"
+  import-pcolors "world.png"
+  recalculate-world
   set food-collected 0
   set-default-shape turtles "bug"
   crt population
   [ set size 2         ;; easier to see
     set color red      ;; red = not carrying food
     set time-carrying 0 ]   
-  setup-patches-random
+  ;;setup-patches-random
   reset-ticks
+end
+
+to recalculate-world
+  ask patches [
+    if pcolor = violet [ set nest? true ]
+    if pcolor = green [ set is-grass? true ]
+    if pcolor = 106 [ set food 1 ]
+  ]
 end
 
 to setup-patches-random
@@ -250,8 +260,8 @@ end
 GRAPHICS-WINDOW
 257
 10
-765
-539
+764
+538
 35
 35
 7.0
