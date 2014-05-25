@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sociálnych hmyz – Mravce</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/freelancer.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- IE8 support for HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Sociálnych hmyz – Mravce</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#uvod">Úvod</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#popis-problemu">Popis problému</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#zakladne-pojmy">Základné pojmy</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#popis-modelu">Popis modelu</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#fungovanie-modelu">Fungovanie modelu</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="img/Black-Ant.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">Mravce - Simulácia symbiózy s druhom Aphidoidea</span>
+                        <hr class="star-light">
+                        <span class="skills">Richard Ludvigh 409737 &amp; Filip Zachar 409815</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="uvod">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Úvod</h2><br>
+                </div>
+            </div>
+            <div class="row">
+                <p>
+                    V tomto projekte sme sa zamerali na život mravcov druhu Lasius niger (mravec čierny) v
+                    obmedzujúcich podmienkach prostredia. Tento druh mravcov je známy svojou symbiózou
+                    s voškami druhu Aphidoidea, ktorá spočíva v starostlivosti a ochrane tohto hmyzu mravcami.
+                    Mravce majú však jasný zámer, nie sú bezhlavo veľkorysé, od vošiek očakávajú odplatu vo forme
+                    sladkej šťavy, ktorú vylučujú, no v prípade nedostatku potravy ich začínajú požierať celé.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="success" id="popis-problemu">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Popis problému</h2>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <p>
+                    Zaoberáme sa správaním mravcov, ktorý sú situovaný do prostredia s obmedzenými zdrojmi potravy.
+                    Na obrázku 1 môžeme vidieť počiatočné podmienky z ktorých sme vychádzali. Mapa má rozmery 70 x 70
+                    pixelov. Fialovou farbou je znázornené mravenisko, červenou štartovací bod mravcov, modrou
+                    počiatočný výskyt vošiek a zelenou miesta vhodné pre život vošiek. Čierna farba tvorí pre nás
+                    nezaujímavé prostredie.
+                </p>
+                <br>
+            </div>
+            <div class="row text-center">
+                <div class="col-xs-6 col-xs-offset-3">
+                    <img src="img/world.png">
+                    <div class="caption">
+                        Obrázok 1: Mapa prostredia zobrazujúca počiatočné podmienky
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <p>
+                    Rozhodli sme sa preto skúmať či mravenisko prežije aspoň 10 000 tikov a koľko potravy sa za ten
+                    čas podarí mravcom nazbierať a to všetko na závislosti od toho ako veľmi mravci voškám pomáhajú
+                    a ako ďaleko ich prenášajú.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="zakladne-pojmy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Základné pojmy</h2>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="list-group col-xs-8 col-xs-offset-2">
+                    <li class="list-group-item">
+                        <strong>Tick </strong>- základná jednotka času, za jeden tick urobí mravec jeden krok
+                    </li>
+                    <li class="list-group-item">
+                        <strong>time-to-grow </strong>- počet tickov potrebných k rozmoženiu vošky
+                    </li>
+                    <li class="list-group-item" style="background-color: transparent;">
+                        <strong>time-to-drop </strong>- počet tickov / krokov, ktoré mravec urazí pred položením vošky
+                    </li>
+                    <li class="list-group-item" style="background-color: transparent;">
+                        <strong>farming-probability </strong>- pravdepodobnosť, že mravec vošku zezužitkuje ako potravu a prenesie ju na
+                        iné vhodné miesto
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="success" id="popis-modelu">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Popis modelu a jeho prvkov</h2>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <p>
+                    Náš zjednodušený model zanedbáva vylučovanie sladkých štiav vošiek a poskytuje mravcom potravu len
+                    vo forme samotných vošiek. Jediným zdrojom potravy sú teda vošky samotné, a úlohou mravcov je
+                    rozhodnúť sa či vošku zjesť alebo jej pomôcť rozmnožovať sa. Správanie je závisle od parametrov
+                    ako časové obdobie potrebné na rozmnožovanie vošiek, pravdepodobnosť s akou sa mravec rozhoduje
+                    či vošku prenesie alebo zužitkuje ako potravu, a počet krokov, ktoré mravec urobí pred tým ako
+                    vošku opäť položí.
+                </p>
+                <br>
+                <p>
+                    Model bol rozšírený z modelu mravcov poskytovaného knižnicou NetLoga. Základný model popisuje
+                    nasledovné pravidlá:
+                </p>
+            </div>
+            <div class="row">
+                <ul class="list-group col-xs-8 col-xs-offset-2">
+                    <li class="list-group-item" style="background-color: transparent;">
+                        1. Po mape je cítiť pach mraveniska, tento pach je intenzívnejší bližšie k mravenisku.
+                    </li>
+                    <li class="list-group-item" style="background-color: transparent;">
+                        2. Mravec, ktorý hľadá potravu sa riadi náhodne v každom svojom kroku, pokiaľ cíti hormón iného
+                        mravca nasleduje ho.
+                    </li>
+                    <li class="list-group-item" style="background-color: transparent;">
+                        3. Mravec, ktorý našiel potravu vylučuje hormón, a ide za pachom mraveniska.
+                    </li>
+                    <li class="list-group-item" style="background-color: transparent;">
+                        4. Mravec, ktorý dorazil do mraveniska s potravou, položí potravu a pokračuje podľa bodu 2.
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <p>
+                    Potrava z pôvodného modelu bola prerobená na jednotlivé vošky. Vošky sa môžu nachádzať len na
+                    zelených oblastiach (viď Obrázok 1)  a to v počte maximálne troch vošiek na jedno miesto.
+                    Podľa parametru T<sub>grow</sub> dochádza k rozmnožovaniu vošiek, pri ktorom je s 50%
+                    pravdepodobnosťou možné rozmnožiť sa na jedno z ôsmich susedných vyhovujúcich miest, zároveň sa
+                    zvyšuje počet vošiek až po dosiahnutie maxima. Miesto, ktoré obsahuje vošky sa stane po
+                    T<sub>die</sub> tikoch nehostinným a vošky, ktoré sa na ňom nachádzali umierajú, nasledujúci tik,
+                    je už miesto opäť vyhovujúce pre život vošky.
+                </p>
+            </div>
+            <div class="row success">
+                <div class="col-xs-offset-3 col-xs-6">
+                    <p>
+                        T<sub>grow</sub> &equals; time-to-grow * random(50)
+                    </p>
+                    <p>
+                        T<sub>die</sub> &equals; time-to-grow * 5
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <p>
+                    Boli upravené niektoré pravidlá mravcov:
+                </p>
+            </div>
+            <div class="row">
+                <ul class="list-group col-xs-8 col-xs-offset-2" style="background-color: transparent;">
+                    <li class="list-group-item" style="background-color: transparent;">
+                        4. Mravec, ktorý našiel vošku sa rozhoduje či ju zužitkuje alebo prenesie
+                    </li>
+                    <li class="list-group-item" style="background-color: transparent;">
+                        5. Mravec, ktorý sa rozhodol preniesť vošku odoberie počet vošiek na danom mieste a náhodným
+                        pohybom hľadá nové miesto s podmienkou že prejde vopred určený minimálny počet krokov. Počas
+                        tohto pohybu mravec nevylučuje ani nenasleduje hormón. Pokiaľ po 20 krokoch od počtu
+                        minimálnych krokov nenájde vhodné miesto vošku nechá tak a pokračuje podľa pravidla 2.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="fungovanie-modelu">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Fungovanie modelu</h2>
+                <br>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-xs-6 col-xs-offset-3">
+                    <img src="img/world.png">
+                    <div class="caption">
+                        Obrázok 2: Model za behu. Červenou je zobrazený hormón vylučovaný mravcami nesúcimi potravu spať do mraveniska. Červené mravce hľadajú potravu, oranžové mravce nesú potravu do mraveniska a žlté mravce prenášajú vošku na iný miesto. Modrou sú zobrazené vošky a svetlosťou modrej farby ich počet ( svetlejšia modrá znamená väčší počet vošiek )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; 2014 - Richard Ludvigh &amp; Filip Zachar
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-top page-scroll visible-xs visble-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+    <script src="js/freelancer.js"></script>
+
+</body>
+
+</html>
