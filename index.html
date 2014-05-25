@@ -165,8 +165,8 @@
                         <strong>time-to-drop </strong>- počet tickov / krokov, ktoré mravec urazí pred položením vošky
                     </li>
                     <li class="list-group-item" style="background-color: transparent;">
-                        <strong>farming-probability </strong>- pravdepodobnosť, že mravec vošku zezužitkuje ako potravu a prenesie ju na
-                        iné vhodné miesto
+                        <strong>farming-probability </strong>- pravdepodobnosť, že mravec vošku nezužitkuje ako potravu
+                        ale prenesie ju na iné vhodné miesto
                     </li>
                 </ul>
             </div>
@@ -313,6 +313,25 @@
             <div class="col-lg-12 text-center">
                 <h2>Merania</h2>
                 <br>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <p>
+                    Merali sme správanie mravcov v závislosťi na dvoch parametroch: <strong>farming-probability</strong> a
+                    <strong>time-to-drop</strong>, v intervaloch :
+                    farming-probabiliy: [20, 21, 22, .., 60],
+                    time-to-drop: [0,10,20,30].
+                    <br>Pre každu z týchto kombinácii sme pustili 50 simulácií, pre čo najväčšie
+                    možné vylúčenie náhodných výsledkou, ktoré vznikajú náhodným pohybom mravcov. V súčte to dalo 8200
+                    simulácií, z ktorých sme čerpali nasledovné data.
+                    <br><br>
+                    <small>
+                        Zaujímavosť: Simulácie bežali dokopy 17 hodín na 12 jadrách čo v konečnom dôsledku tvorí 204
+                        hodín procesorového času.
+                    </small>
+
+                </p>
             </div>
         </div>
     </section>
