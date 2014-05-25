@@ -63,6 +63,15 @@
                     <li class="page-scroll">
                         <a href="#fungovanie-modelu">Fungovanie modelu</a>
                     </li>
+                    <li class="page-scroll">
+                        <a href="#merania">Merania</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#vysledky">Výsledky</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#zaver">Záver</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -118,7 +127,10 @@
                     Na obrázku 1 môžeme vidieť počiatočné podmienky z ktorých sme vychádzali. Mapa má rozmery 70 x 70
                     pixelov. Fialovou farbou je znázornené mravenisko, červenou štartovací bod mravcov, modrou
                     počiatočný výskyt vošiek a zelenou miesta vhodné pre život vošiek. Čierna farba tvorí pre nás
-                    nezaujímavé prostredie.
+                    nezaujímavé prostredie. Problémom bolo určiť aké je najoptimálnejšie správanie mravcov, ktoré chcú
+                    v takomto prostredí prežiť, a neskôr premnožiť vošky, tak aby bolo potravy čo najviac. Zároveň je
+                    dôležité klásť dôraz na celkový počet vyzbieranej potravy, aby sme predišli situácii, kedy mravce
+                    síce dlho prežijú, roznesú vošky po celom území, ale nenazbierajú žiadnu potravu.
                 </p>
                 <br>
             </div>
@@ -129,14 +141,6 @@
                         Obrázok 1: Mapa prostredia zobrazujúca počiatočné podmienky
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <br>
-                <p>
-                    Rozhodli sme sa preto skúmať či mravenisko prežije aspoň 10 000 tikov a koľko potravy sa za ten
-                    čas podarí mravcom nazbierať a to všetko na závislosti od toho ako veľmi mravci voškám pomáhajú
-                    a ako ďaleko ich prenášajú.
-                </p>
             </div>
         </div>
     </section>
@@ -188,7 +192,7 @@
                 </p>
                 <br>
                 <p>
-                    Model bol rozšírený z modelu mravcov poskytovaného knižnicou NetLoga. Základný model popisuje
+                    Model bol rozšírený z modelu mravcov poskytovaného knižnicou NetLoga<sup>1</sup>. Základný model popisuje
                     nasledovné pravidlá:
                 </p>
             </div>
@@ -223,7 +227,7 @@
             <div class="row success">
                 <div class="col-xs-offset-3 col-xs-6">
                     <p>
-                        T<sub>grow</sub> &equals; time-to-grow * random(50)
+                        T<sub>grow</sub> &equals; time-to-grow + random(50)
                     </p>
                     <p>
                         T<sub>die</sub> &equals; time-to-grow * 5
@@ -259,18 +263,93 @@
             </div>
         </div>
         <div class="container">
+            <div class="row">
+                <h3>Setup</h3>
+                <p>
+                    Nastavenie modelu začína načítaním a spracovaním mapy<sup>2</sup>, ktorá bola vygenerovaná raz, a používa
+                    sa spoločne pre všetky simulácie pre dosiahnuťie rovnakých počiatočných podmienok.
+                </p>
+                <p>
+                    Zvolili sme konštatny pre nasledujúce parametry:
+                </p>
+                <ul class="list-group col-xs-8 col-xs-offset-2">
+                    <li class="list-group-item">
+                        <strong>population = 100</strong> (populácia mraveniska)
+                    </li>
+                    <li class="list-group-item">
+                        <strong>diffusion-rate = 23</strong> (rozptyl hormónov vylučovaných mravcami)
+                    </li>
+                    <li class="list-group-item" style="background-color: transparent;">
+                        <strong>evaporation-rate = 7</strong> (rýchlosť vyparovania hormónov)
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <h3>Run</h3>
+                <p>
+                    Po spustení vybieha každý mravec z mraveniska, a náhodne po priestore hľadá vošky, ktoré buď zbiera
+                    alebo prenáša na ďalšie vhodné miesto na mape, a to na základe pravdepodobnosti určenej v premennej
+                    farming-probability. Mravec takisto dodržuje počet prejdených krokov s voškou v intervale (time-to-drop,
+                    time-to-drop + 20). Na obrázku 2 môžeme vydieť stav modelu za behu.
+                </p>
+                <br>
+            </div>
             <div class="row text-center">
                 <div class="col-xs-6 col-xs-offset-3">
-                    <img src="img/world.png">
+                    <img src="img/in-motion.png">
                     <div class="caption">
-                        Obrázok 2: Model za behu. Červenou je zobrazený hormón vylučovaný mravcami nesúcimi potravu spať do mraveniska. Červené mravce hľadajú potravu, oranžové mravce nesú potravu do mraveniska a žlté mravce prenášajú vošku na iný miesto. Modrou sú zobrazené vošky a svetlosťou modrej farby ich počet ( svetlejšia modrá znamená väčší počet vošiek )
+                        Obrázok 2: Model za behu. Červenou je zobrazený hormón vylučovaný mravcami nesúcimi potravu spať
+                        do mraveniska. Červené mravce hľadajú potravu, oranžové mravce nesú potravu do mraveniska a žlté
+                        mravce prenášajú vošku na iný miesto. Modrou sú zobrazené vošky a svetlosťou modrej farby ich
+                        počet ( svetlejšia modrá znamená väčší počet vošiek ).
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <section id="merania" class="success">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Merania</h2>
+                <br>
+            </div>
+        </div>
+    </section>
+
+    <section id="vysledky">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Výsledky</h2>
+                <br>
+            </div>
+        </div>
+    </section>
+
+    <section id="zaver" class="success">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Záver</h2>
+                <br>
+            </div>
+        </div>
+    </section>
+
     <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <p class="small col-xs-8 col-xs-offset-2 text-left">
+                        <sup>1</sup> Wilensky, U. (1997). NetLogo Ants model.
+                        <a href="http://ccl.northwestern.edu/netlogo/models/Ants">http://ccl.northwestern.edu/netlogo/models/Ants</a>.
+                        Center for Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL.
+                    </p>
+                    <p class="small col-xs-8 col-xs-offset-2 text-left">
+                        <sup>2</sup> Počiatočná <a href="world.png">mapa</a> využívaná modelom.
+                    </p>
+                </div>
+            </div>
+        </div>
         <div class="footer-below">
             <div class="container">
                 <div class="row">
