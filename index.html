@@ -18,6 +18,11 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+    <!--<script src="js/highcharts.js"-->
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+
+
     <!-- IE8 support for HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -344,6 +349,90 @@
                 <h2>Výsledky</h2>
                 <br>
             </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div id="container-survives" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <script>
+                    $( document ).ready(function() {
+                        $(function () {
+                            $('#container-survives').highcharts({
+                                chart: {
+                                    spacingBottom: 50
+                                },
+                                title: {
+                                    text: 'Surviving 10 000 ticks',
+                                    x: -20 //center
+                                },
+                                credits: {
+                                    enabled: false
+                                },
+                                xAxis: {
+                                    categories: ["20 %", "21 %", "22 %", "23 %", "24 %", "25 %", "26 %", "27 %", "28 %", "29 %", "30 %", "31 %", "32 %", "33 %", "34 %", "35 %", "36 %", "37 %", "38 %", "39 %", "40 %", "41 %", "42 %", "43 %", "44 %", "45 %", "46 %", "47 %", "48 %", "49 %", "50 %", "51 %", "52 %", "53 %", "54 %", "55 %", "56 %", "57 %", "58 %", "59 %", "60 %"],
+                                    title: {
+                                        text: 'farming-probability'
+                                    }
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: 'počet prípadov kedy mravenisko prežilo 10 000 tikov', //'# of runs that survived 10000 ticks'
+                                    },
+                                    plotLines: [
+                                        {
+                                            value: 0,
+                                            width: 1,
+                                            color: '#808080'
+                                        }
+                                    ]
+                                },
+                                tooltip: {
+                                    valueSuffix: ''
+                                },
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'left',
+                                    verticalAlign: 'bottom',
+                                    borderWidth: 0,
+                                    y: 30,
+                                    x: 40,
+                                    floating: true
+                                },
+
+
+                                series: [
+                                    {
+                                        name: '0 - 20 krokov, ktoré mravec urazí pred položením vošky',
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 4, 5, 5]
+                                    },
+                                    {
+                                        name: '10 - 30 krokov, ktoré mravec urazí pred položením vošky',
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 2, 7, 7, 8, 9, 18, 19, 18, 23, 24, 26, 37, 34, 37, 41, 38, 45, 47, 43, 48, 49, 48, 48, 49, 49, 49, 50, 50]
+                                    },
+                                    {
+                                        name: '20 - 40 krokov, ktoré mravec urazí pred položením vošky',
+                                        data: [2, 0, 2, 1, 1, 6, 6, 8, 13, 15, 16, 23, 20, 25, 29, 40, 31, 42, 46, 43, 49, 47, 48, 48, 47, 49, 50, 49, 50, 50, 49, 50, 49, 50, 50, 50, 50, 50, 50, 50, 50]
+                                    },
+                                    {
+                                        name: '30 - 50 krokov, ktoré mravec urazí pred položením vošky',
+                                        data: [3, 5, 10, 8, 12, 15, 16, 20, 26, 31, 33, 34, 41, 42, 46, 45, 47, 48, 44, 49, 48, 49, 50, 50, 48, 49, 50, 50, 50, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+                                    },
+                                ]
+                            });
+                        });
+                    });
+                </script>
+            </div>
+            <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+            <script type="text/javascript">
+                $(function () {
+                    $("#container").highcharts('StockChart', {
+                        series: [{
+                            data: [5, 10]
+                        }]
+                    });
+
+                });
+            </script>
         </div>
     </section>
 
