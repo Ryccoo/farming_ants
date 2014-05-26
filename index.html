@@ -108,7 +108,7 @@
             </div>
             <div class="row">
                 <p>
-                    V tomto projekte sme sa zamerali na život mravcov druhu Lasius niger (mravec čierny) v
+                    <span style="padding-left: 40px;"></span>V tomto projekte sme sa zamerali na život mravcov druhu Lasius niger (mravec čierny) v
                     obmedzujúcich podmienkach prostredia. Tento druh mravcov je známy svojou symbiózou
                     s voškami druhu Aphidoidea, ktorá spočíva v starostlivosti a ochrane tohto hmyzu mravcami.
                     Mravce majú však jasný zámer, nie sú bezhlavo veľkorysé, od vošiek očakávajú odplatu vo forme
@@ -128,7 +128,7 @@
             </div>
             <div class="row">
                 <p>
-                    Zaoberáme sa správaním mravcov, ktorý sú situovaný do prostredia s obmedzenými zdrojmi potravy.
+                    <span style="padding-left: 40px;"></span>Zaoberáme sa správaním mravcov, ktorý sú situovaný do prostredia s obmedzenými zdrojmi potravy.
                     Na obrázku 1 môžeme vidieť počiatočné podmienky z ktorých sme vychádzali. Mapa má rozmery 70 x 70
                     pixelov. Fialovou farbou je znázornené mravenisko, červenou štartovací bod mravcov, modrou
                     počiatočný výskyt vošiek a zelenou miesta vhodné pre život vošiek. Čierna farba tvorí pre nás
@@ -188,7 +188,7 @@
             </div>
             <div class="row">
                 <p>
-                    Náš zjednodušený model zanedbáva vylučovanie sladkých štiav vošiek a poskytuje mravcom potravu len
+                    <span style="padding-left: 40px;"></span>Náš zjednodušený model zanedbáva vylučovanie sladkých štiav vošiek a poskytuje mravcom potravu len
                     vo forme samotných vošiek. Jediným zdrojom potravy sú teda vošky samotné, a úlohou mravcov je
                     rozhodnúť sa či vošku zjesť alebo jej pomôcť rozmnožovať sa. Správanie je závisle od parametrov
                     ako časové obdobie potrebné na rozmnožovanie vošiek, pravdepodobnosť s akou sa mravec rozhoduje
@@ -197,7 +197,7 @@
                 </p>
                 <br>
                 <p>
-                    Model bol rozšírený z modelu mravcov poskytovaného knižnicou NetLoga<sup>1</sup>. Základný model popisuje
+                    <span style="padding-left: 40px;"></span>Model bol rozšírený z modelu mravcov poskytovaného knižnicou NetLoga<sup>1</sup>. Základný model popisuje
                     nasledovné pravidlá:
                 </p>
             </div>
@@ -220,7 +220,7 @@
             </div>
             <div class="row">
                 <p>
-                    Potrava z pôvodného modelu bola prerobená na jednotlivé vošky. Vošky sa môžu nachádzať len na
+                    <span style="padding-left: 40px;"></span>Potrava z pôvodného modelu bola prerobená na jednotlivé vošky. Vošky sa môžu nachádzať len na
                     zelených oblastiach (viď Obrázok 1)  a to v počte maximálne troch vošiek na jedno miesto.
                     Podľa parametru T<sub>grow</sub> dochádza k rozmnožovaniu vošiek, pri ktorom je s 50%
                     pravdepodobnosťou možné rozmnožiť sa na jedno z ôsmich susedných vyhovujúcich miest, zároveň sa
@@ -241,7 +241,7 @@
             </div>
             <div class="row">
                 <p>
-                    Boli upravené niektoré pravidlá mravcov:
+                    <span style="padding-left: 40px;"></span>Boli upravené niektoré pravidlá mravcov:
                 </p>
             </div>
             <div class="row">
@@ -271,11 +271,11 @@
             <div class="row">
                 <h3>Setup</h3>
                 <p>
-                    Nastavenie modelu začína načítaním a spracovaním mapy<sup>2</sup>, ktorá bola vygenerovaná raz, a používa
+                    <span style="padding-left: 40px;"></span>Nastavenie modelu začína načítaním a spracovaním mapy<sup>2</sup>, ktorá bola vygenerovaná raz, a používa
                     sa spoločne pre všetky simulácie pre dosiahnuťie rovnakých počiatočných podmienok.
                 </p>
                 <p>
-                    Zvolili sme konštatny pre nasledujúce parametry:
+                    <span style="padding-left: 40px;"></span>Zvolili sme konštatny pre nasledujúce parametry:
                 </p>
                 <ul class="list-group col-xs-8 col-xs-offset-2">
                     <li class="list-group-item">
@@ -292,7 +292,7 @@
             <div class="row">
                 <h3>Run</h3>
                 <p>
-                    Po spustení vybieha každý mravec z mraveniska, a náhodne po priestore hľadá vošky, ktoré buď zbiera
+                    <span style="padding-left: 40px;"></span>Po spustení vybieha každý mravec z mraveniska, a náhodne po priestore hľadá vošky, ktoré buď zbiera
                     alebo prenáša na ďalšie vhodné miesto na mape, a to na základe pravdepodobnosti určenej v premennej
                     farming-probability. Mravec takisto dodržuje počet prejdených krokov s voškou v intervale (time-to-drop,
                     time-to-drop + 20). Na obrázku 2 môžeme vydieť stav modelu za behu.
@@ -323,13 +323,15 @@
         <div class="container">
             <div class="row">
                 <p>
-                    Merali sme správanie mravcov v závislosťi na dvoch parametroch: <strong>farming-probability</strong> a
+                    <span style="padding-left: 40px;"></span>Merali sme správanie mravcov v závislosťi na dvoch parametroch: <strong>farming-probability</strong> a
                     <strong>time-to-drop</strong>, v intervaloch :
                     farming-probabiliy: [20, 21, 22, .., 60],
                     time-to-drop: [0,10,20,30].
-                    <br>Sledovali sme ako nasledovné parametre ovplyvnia prežitie mravcov, ako aj počet vyzbieranej
+                    <br>
+                    <span style="padding-left: 40px;"></span>Sledovali sme ako nasledovné parametre ovplyvnia prežitie mravcov, ako aj počet vyzbieranej
                     potravy. Či je dôležitejšie potravu prenášať ďalej, alebo radšej prenášať častejšie.
-                    <br>Pre každu z týchto kombinácii sme pustili 50 simulácií, pre čo najväčšie
+                    <br>
+                    <span style="padding-left: 40px;"></span>Pre každu z týchto kombinácii sme pustili 50 simulácií, pre čo najväčšie
                     možné vylúčenie náhodných výsledkou, ktoré vznikajú náhodným pohybom mravcov. V súčte to dalo 8200
                     simulácií, z ktorých sme čerpali nasledovné data.
                     <br><br>
@@ -353,12 +355,12 @@
         <div class="container">
             <div class="row">
                 <p>
-                    Na grafe 1 môžeme pozorovať počet simulácií pre jednotlivé parametre, ktorým sa úspešne podarilo
+                    <span style="padding-left: 40px;"></span>Na grafe 1 môžeme pozorovať počet simulácií pre jednotlivé parametre, ktorým sa úspešne podarilo
                     prežiť prvých 10 000 tikov. Graf ukazuje silu parametru, <i>time-to-drop</i>, ktorý popisuje ako
                     dlho mravec nesie vošku od miesta, kde ju našiel, čím zaručí, že voška má dostatok času na rozmnoženie
                     pred tým ako ju objavia ostatné mravce.
                     <br>
-                    Pri <i>20-40</i> a <i>30-50</i> krokoch pozorujeme, že už pri pravdepodobnosti farmárčenia 40%
+                    <span style="padding-left: 40px;"></span>Pri <i>20-40</i> a <i>30-50</i> krokoch pozorujeme, že už pri pravdepodobnosti farmárčenia 40%
                     kolónia prežíva takmer so 100% pravdepodobnosťou, kdežto pri hodnote <i>0-20</i> je úspešnosť
                     prežitia mizivá a to aj pri vysokých hodnotách <i>farming-probablilty</i>.
                 </p>
@@ -536,6 +538,13 @@
             <div class="col-lg-12 text-center">
                 <h2>Záver</h2>
                 <br>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row text-center">
+                <p>
+                    <small>Prehlásenie: Pri týchto simuláciach nebol zranený žiaden mravec. O osude vošiek pomlčíme.</small>
+                </p>
             </div>
         </div>
     </section>
