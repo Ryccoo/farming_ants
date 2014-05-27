@@ -256,6 +256,25 @@
                     </li>
                 </ul>
             </div>
+            <div class="row text-center">
+                <h3>Spätné väzby</h3>
+            </div>
+            <div class="row">
+                <p>
+                    <span style="padding-left: 40px;"></span>
+                    Vošky samotné su spojené s mapou dvoma väzbami. Čím viac vošiek, tým viac sa rozmnožújú, tým viac
+                    vošiek, ale zároveň, miesto začína byť po určitom čase nehostinné a preto čím viac vošiek, tým viac
+                    pokrytého priestoru, tým vačšia šanca že vošky na nejakom mieste umrú.
+                    <br>
+                    <span style="padding-left: 40px;"></span>
+                    Medzi mravcami a voškami sa naraz vyskytuje aj pozitívna, aj negatívna spätná väzba. Prvou, pozitívnou
+                    je, že čím viac vošiek na mape je tým je väčšia pravdepodobnosť, že ju mravec nájde, prenesie ju na
+                    iné miesto a tým sa viac dokážu rozmnožiť. Avšak čím je väčšia šanca, že mravec vošku objaví, narastá
+                    aj šanca, že ju zužitkuje ako potravu. Pomer týchto väzieb je určený parametrom
+                    <i>farming-probabilty</i>.
+                </p>
+                <br>
+            </div>
         </div>
     </section>
 
@@ -433,8 +452,28 @@
                         });
                     });
                 </script>
-                <div id="container-average-food-on-trees" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+                <hr>
+                <p>
+                    <span style="padding-left: 40px;"></span>Graf 2 zobrazuje priemerný počet vošiek na mape počas celej simulácie pre zadané parametre. Nezabúdajme
+                    však, na jednom bode sa môžu nachádzať až tri vošky, preto je možné dosiahnuťie tak vysokých čísel.
+                    Z pozorovaní sme určili tri významné hranice, stavy, počtu
+                    vošiek na mape.
+                    <br>
+                    <span style="padding-left: 40px;"></span>Prvá, najspodnejšia (zelená), hranica zobrazuje počet, ktorý je
+                    <strong>nevyhnutný</strong> k prežitiu. Prekonaním tejto hranice sa dostáva do územia, vymedzeného
+                    zelenou a modrou hranicou. V tejto oblasti sa nachádzajú simulácie, ktoré prežívajú avšak, po celý
+                    čas však majú potravy tak akurát.
+                    <br><span style="padding-left: 40px;"></span>Prekonaním druhej (modrej) hranice sa mravce dostali do stavu,
+                    kedy sa im vošky podarilo rozniesť tak veľmi, že dochádzalo k ich premnoženiu. V tomto stave už mravce
+                    nemali núdzu o potravu a počet vošiek na mape sa neustále zvyšuje až po tretiu (červenú) hranicu.
+                    <br><span style="padding-left: 40px;"></span>Tretia (červená) hranica je limitou počtu vošiek na mape.
+                    Pri tomto počte už narážaju vošky na obmedzenia mapy, kedy sa už nemajú kde šíriť a mravci ich
+                    odnášaju v ustálenom počte.
 
+
+
+                </p>
+                <div id="container-average-food-on-trees" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
                 <script language="JavaScript" type="text/javascript">
                     $(function () {
                         $('#container-average-food-on-trees').highcharts({
@@ -496,7 +535,17 @@
                                             x : -20
                                         },
                                         zIndex : -490
-                                    }
+                                    },
+                                    {
+                                        value: 3000,
+                                        width: 3,
+                                        dashStyle : 'shortdash',
+                                        color: 'red',
+                                        label : {
+                                            text : 'Približná limita maximálneho počtu vošiek v nami zvolených simuláciach'
+                                        },
+                                        zIndex : -500
+                                    },
                                 ],
                             },
                             tooltip: {
@@ -565,7 +614,7 @@
         <div class="container">
             <div class="row text-center">
                 <p>
-                    <small>Prehlásenie: Pri týchto simuláciach nebol zranený žiaden mravec. O osude vošiek pomlčíme.</small>
+                    <small>Prehlásenie: Pri týchto simuláciach nebol zranený žiaden mravec.</small>
                 </p>
             </div>
         </div>
