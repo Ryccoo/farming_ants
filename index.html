@@ -32,7 +32,6 @@
 </head>
 
 <body id="page-top" class="index">
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -461,21 +460,44 @@
                                 title: {
                                     text: 'počet potravy (vošiek) na mape',
                                 },
+                                plotBands: [
+                                    {
+                                        color: '#FCFFC5',
+                                        from: 47,
+                                        to: 1000,
+                                        label : {
+                                            test : 'Oblasť prežívania'
+                                        }
+                                    }
+                                ],
                                 plotLines: [{
                                     value: 0,
                                     width: 1,
                                     color: '#808080'
                                 },
                                     {
-                                        value: 47,
+                                        value: 46,
                                         width: 3,
                                         dashStyle : 'shortdash',
                                         color: 'green',
                                         label : {
                                             text : 'Odhadovaná hranica potrebná pre prežitie'
-                                        }
+                                        },
+                                        zIndex : -500
+                                    },
+                                    {
+                                        value: 1000,
+                                        width: 3,
+                                        dashStyle : 'shortdash',
+                                        color: 'blue',
+                                        label : {
+                                            text : 'Odhadovaná hranica blahobytu',
+                                            align : 'right',
+                                            x : -20
+                                        },
+                                        zIndex : -490
                                     }
-                                ]
+                                ],
                             },
                             tooltip: {
                                 valueSuffix: '',
