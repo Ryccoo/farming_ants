@@ -463,9 +463,12 @@
                     <strong>nevyhnutný</strong> k prežitiu. Prekonaním tejto hranice sa dostáva do územia, vymedzeného
                     zelenou a modrou hranicou. V tejto oblasti sa nachádzajú simulácie, ktoré prežívajú avšak, po celý
                     čas však majú potravy tak akurát.
+
                     <br><span style="padding-left: 40px;"></span>Prekonaním druhej (modrej) hranice sa mravce dostali do stavu,
                     kedy sa im vošky podarilo rozniesť tak veľmi, že dochádzalo k ich premnoženiu. V tomto stave už mravce
                     nemali núdzu o potravu a počet vošiek na mape sa neustále zvyšuje až po tretiu (červenú) hranicu.
+                    V tomto stave nás už zaújma ako vyťažiť, čo najviac potravy, čo bližšie rozanalyzujeme v grafe č. 3.
+
                     <br><span style="padding-left: 40px;"></span>Tretia (červená) hranica je limitou počtu vošiek na mape.
                     Pri tomto počte už narážaju vošky na obmedzenia mapy, kedy sa už nemajú kde šíriť a mravci ich
                     odnášaju v ustálenom počte.
@@ -482,7 +485,7 @@
                                 height: 600
                             },
                             title: {
-                                text: 'Priemerný počet potravy na mape',
+                                text: 'Graf 2: Priemerný počet potravy na mape',
                                 x: -20 //center
                             },
                             credits: {
@@ -595,6 +598,121 @@
                                 {
                                     name: '30 - 50 krokov (dožili sa 10 000 tikov)',
                                     data: [485,820,852,1016,992,1120,1144,1030,1251,1255,1452,1396,1520,1517,1637,1710,1822,1853,1886,1904,2069,2125,2121,2204,2219,2143,2281,2330,2359,2351,2453,2419,2420,2530,2522,2537,2614,2638,2628,2679,2717]
+                                },
+                            ]
+                        });
+                    });
+                </script>
+                <hr>
+                <p>
+                    <span style="padding-left: 40px;"></span>
+                    Graf 3 zobrazuje celkové množstvo vyzbieraného jedla. Hodnoty v prípadoch kedy sa mravenisko
+                    nedožilo 10 000 tikov nie sú zaujmavé. Pozoruhodné chovanie sme spozorovali pri parametre
+                    <i>time-to-drop</i> nastavenom na <i>30 - 50</i> krokov. V tomto prípade mravenisko aj pri nižších
+                    hodnotách <i>farming-probability</i> dožilo 10 000 tikov. Ako je však vidno na grafe, od určitého
+                    momentu zvyšovanie tohto parametru má negatívny účinok na celkový výkon mraveniska.
+
+                    <br/>
+                    <span style="padding-left: 40px;"></span>
+                    Optimálne nastavenie je okolo <i>41 %</i> kedy sa mravcom podarilo vyzbierť najviac jedla. Ďalšie
+                    zvyšovanie tohto parametru má za následok úpadok celkového výkonu. Vošky sú už dosť rozšírené,
+                    mravce sa im ale stále snažia pomôcť sa ešte viacej rozšíriť. Tým pádom zostáva menšie množstvo
+                    mravcov ktoré donášajú jedlo do mraveniska.
+
+                    <br/>
+                    <span style="padding-left: 40px;"></span>
+                    Podobný jav môžeme pozorovať aj pri hodnote <i>time-to-drop = 20 - 40 krokov</i>. V tomto prípade
+                    vidím optimálnu hodnotu farmárčenia na <i>47 %</i>.  Tento "fázový" posun je samozrejme spôsobený
+                    parametrom <i>time-to-drop</i>, ktorý ovplyvňuje mieru rozšírenia vošiek v priestore.
+                </p>
+                <div id="container-food-collected" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+                <script language="JavaScript" type="text/javascript">
+                    $(function () {
+                        $('#container-food-collected').highcharts({
+                            chart: {
+                                height: 500,
+                                spacingBottom: 50,
+                            },
+                            title: {
+                                text: 'Graf 3: Vyzbierané jedlo',
+                                x: -20 //center
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            xAxis: {
+                                categories: ["20 %", "21 %", "22 %", "23 %", "24 %", "25 %", "26 %", "27 %", "28 %", "29 %", "30 %", "31 %", "32 %", "33 %", "34 %", "35 %", "36 %", "37 %", "38 %", "39 %", "40 %", "41 %", "42 %", "43 %", "44 %", "45 %", "46 %", "47 %", "48 %", "49 %", "50 %", "51 %", "52 %", "53 %", "54 %", "55 %", "56 %", "57 %", "58 %", "59 %", "60 %"],
+                                title: {
+                                    text: 'farming-probability'
+                                }
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'food-collected'
+                                },
+                                type: 'logarithmic',
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+                                }]
+                            },
+                            tooltip: {
+                                shared: true,
+                                valueSuffix: ''
+                            },
+
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'bottom',
+                                verticalAlign: 'bottom',
+                                borderWidth: 0,
+                                y: 40,
+                                x: 40,
+                            },
+
+
+                            series: [
+                                {
+                                    name: '0 - 20 krokov',
+                                    data: [142,140,142,140,142,138,140,147,142,139,141,143,138,140,138,137,143,140,146,149,153,144,148,162,154,151,151,162,155,169,187,196,189,233,191,226,265,288,295,240,309],
+                                    visible: false
+                                },
+                                {
+                                    name: '10 - 30 krokov',
+                                    data: [155,161,165,168,185,172,177,173,188,189,201,226,205,264,201,250,277,246,247,215,270,267,254,304,260,278,251,173,228,205,193,171,131,177,181,174,350,135,70],
+                                    visible: false
+                                },
+                                {
+                                    name: '20 - 40 krokov',
+                                    data: [192,195,201,213,228,234,243,265,268,263,243,253,257,252,268,220,216,213,202,251,158,221,148,112,159,162,null,104,null,null,64,null,157],
+                                    visible: false
+                                },
+                                {
+                                    name: '30 - 50 krokov',
+                                    data: [219,265,251,260,246,320,309,263,260,242,255,239,208,230,277,210,172,222,185,223,127,553,null,null,170,195,null,null,null,178],
+                                    visible: false
+                                },
+                                {
+                                    name: '0 - 20 krokov (dožili sa 10 000 tikov)',
+                                    data: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,821,null,2085,1831,955,927,1070],
+                                    visible: false
+                                },
+                                {
+                                    name: '10 - 30 krokov (dožili sa 10 000 tikov)',
+                                    data: [null,null,null,null,null,null,null,null,null,null,null,2754,3588,3211,2797,3446,2708,3191,4049,3632,3761,3683,4289,3806,4380,4855,4924,4767,5000,5416,5347,5426,5490,5556,5545,5790,5896,5803,5688,5771,5780],
+                                    visible: false
+                                },
+                                {
+                                    name: '20 - 40 krokov (dožili sa 10 000 tikov)',
+                                    data: [3769,null,5416,2210,2729,3333,2910,3849,4609,3807,4349,5092,5287,5000,5641,5426,5740,5775,5726,6119,5933,5860,6140,5978,6261,6275,6152,6463,6284,6275,6325,6357,6147,6240,6060,6033,6016,6015,5962,5895,5793],
+                                    visible: false
+                                },
+                                {
+                                    name: '30 - 50 krokov (dožili sa 10 000 tikov)',
+                                    data: [3566,4839,4858,5439,5347,5514,5518,5070,5693,5625,6202,5837,6178,6053,6273,6435,6610,6563,6533,6479,6776,6813,6729,6785,6690,6385,6576,6564,6509,6333,6427,6232,6099,6201,6021,5943,5944,5852,5673,5628,5524],
+                                    visible: true
                                 },
                             ]
                         });
